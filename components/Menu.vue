@@ -111,6 +111,7 @@ export default {
 .list-all{
         height:94%;
 }
+
 .navigation{
     margin-top:40px; 
     .list{
