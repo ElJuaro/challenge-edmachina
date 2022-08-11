@@ -147,6 +147,9 @@ export default {
     }
 }
 
+.v-btn:not(.v-btn--round).v-size--default{
+    min-width:auto;
+}
 
 .v-btn__content{
      opacity:100 !important;
