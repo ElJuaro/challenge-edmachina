@@ -1,8 +1,8 @@
 <template>
-  <v-app id="app" :style="{background: $vuetify.theme.themes[theme].body}">
+  <v-app id="app">
   <div class="contain-home">
-   <v-main>
     <HeaderVue />
+   <v-main>
     <ContentVue />
     <FooterVue />
   </v-main>
@@ -23,11 +23,6 @@ export default {
     ContentVue,
     FooterVue
     },
-    computed:{
-        theme(){
-          return (this.$vuetify.theme.dark) ? 'dark' : 'light'
-        }
-    }
 };
 </script>
 <style>
@@ -38,9 +33,8 @@ html{
   overflow-y: auto !important;
 }
 #app{
-    
-  background-color:  #f4f4f4;
-   font-family: 'Montserrat';
+  font-family: 'Montserrat';
+  font-style: normal;
 }
 
 .contain-home{
@@ -48,11 +42,8 @@ html{
 }
 
 .v-main{
-  padding:48px 0px 0px 0px !important;
+  padding:63px 0px 0px 0px !important;
   height:100%;
 }
 
-.material-icons, .material-icons-outlined, .material-icons-round{
-    font-size: 1.2rem !important;
-}
 </style>

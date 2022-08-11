@@ -1,0 +1,101 @@
+// Ref: https://github.com/nuxt-community/vuetify-module#customvariables
+//
+// The variables you want to modify
+// $font-size-root: 20px;
+:root{
+    --body: #f4f4f4;
+    --header:#4436FD;
+    --menu: #fff;
+    --icons: #6E6B7B;
+    --btnActive: #4436FD;
+    --btnActive-color: #fff;
+    --title-grid:#4436FD;
+    --btnActions:  #AA3EFF;
+    --grid: #fff;
+    --footer: #8b83fc;
+    --menu-profile-content: #4436FD;
+}
+
+.dark-mode{
+    --body: #141c34;
+    --header: #040404;
+    --menu : #283046;
+    --icons: #C4C4C4;
+    --btnActive: #F1BC01; 
+    --btnActive-color:#black;
+    --title-grid: #fff;
+    --btnActions: #F1BC01;
+    --grid :#283046;
+    --footer:  #040404;
+    --menu-profile-content: #F1BC01;
+    --menu-items: #2F3850;
+}
+
+#app{
+    background-color: var(--body);
+}
+
+.header-mode{
+    background:var(--header) !important;
+}
+
+.list-items{
+    background: var(--menu-items);
+}
+
+.navigation-draw{
+    background-color: var(--menu) !important;
+}
+
+.iconTitle{
+    color: var(--icons) !important ;
+}
+
+
+
+.title-grids{
+    color: var(--title-grid);
+}
+
+.iconsContent{
+    color:var(--icons) !important;
+    border-radius:0;
+}
+
+.btns-filter{
+    color:var(--btnActions) !important;
+    font-size:14px;
+    .material-icons{
+        width:20px;
+        height:20px;
+    }
+}
+
+.color-footer{
+    background: var(--footer) !important;
+}
+
+
+
+
+.material-icons, .material-icons-outlined, .material-icons-round{
+    font-size:1.5rem;
+    height:1.3rem;
+    width:1.5rem;
+    line-height: 1.3rem;
+}
+
+.title-grids{
+    font-size: 1.5rem;
+    line-height:1.3rem;
+    width:7.9rem;   
+}
+
+
+.first-row_column , .second-row_column , .three-row_column_1 , .three-row_column_2 {
+    background: var(--grid) !important;
+}
+
+.v-list-item{
+    min-height:1px;
+}

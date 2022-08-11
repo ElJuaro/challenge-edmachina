@@ -9,8 +9,7 @@
         tile
         width="100%"
         height="100%"
-        class="text-center d-flex align-center"
-        :style="{background: $vuetify.theme.themes[theme].footer}">
+        class="color-footer text-center d-flex align-center">
         <v-card-text
         class="white--text"
         height="100%">
@@ -22,10 +21,8 @@
 </template>
 
 <script>
-import global from '../mixins/global.js';
 export default {
     name: "Footer",
-    mixins:[global],
 };
 
 </script>
@@ -38,15 +35,8 @@ export default {
     }
 }
 
-@media(min-height:969px){
-    .container-footer{
-        position:absolute !important;
-    }
-}
-
-
 .container-footer{
-    position:initial;
+    margin-top:10.6rem;
     width:100%;
     bottom:0;
 }

@@ -1,62 +1,60 @@
 <template>
     <v-navigation-drawer 
-    class="navigation"
+    class="navigation-draw"
     app 
+    color="false"
     v-model="drawer" 
     hide-overlay
     stateless= "stateless"
-    width="250"
-    :style="{background: $vuetify.theme.themes[theme].menu}">   
+    width="260">   
                 <v-list class="list-all">
                     <v-list-item-group 
-                    v-model="selectedItem" 
-                    active-class="bla"                
+                    v-model="selectedItem"              
                     style="height:100%;">
                         <v-list-item
                         class="list-items mt-2"
                         v-for="(item, i) in menuInit"
-                        :style="{background: $vuetify.theme.themes[theme].menu}"
                         :key="i">
-                            <v-list-item-icon>
+                            <v-list-item-icon class="iconTitle">
                                <i class="material-icons-round">{{item.icon}}</i>
                             </v-list-item-icon> 
-                            <v-list-item-content>
+                            <v-list-item-content class="iconTitle">
                                <v-list-item-title >{{item.text}}</v-list-item-title>
                             </v-list-item-content>
                         </v-list-item>
-    
-                        <div class="reports mt-3">
-                            <div class="list d-flex justify-space-between">
+
+                        <div class="reports">
+                            <div class="list d-flex justify-space-between mt-5 mb-2">
                                 <span>REPORTS</span>
-                                <v-icon right>mdi-clipboard-text-outline</v-icon>
+                                <i class="material-icons" right>list_alt</i>
                             </div>
                             <v-list-item
                             class="list-items mt-2"
                             v-for="(item, i) in menuReport"
-                            :style="{background: $vuetify.theme.themes[theme].menu}"
                             :key="'A' + i">
-                                <v-list-item-icon>
-                                     <i class="material-icons" v-if="!item.mdiIcon">{{item.icon}} </i>
-                                     <v-icon class="mdi-rotate-315" v-if="item.mdiIcon">{{item.icon}}</v-icon>
+                                <v-list-item-icon class="iconTitle">
+                                     <i class="material-icons" v-if="!item.sharp">{{item.icon}} </i>
+                                     <i class="material-icons-sharp" v-if="item.sharp">{{item.icon}}</i>
                                 </v-list-item-icon> 
-                                <v-list-item-content>
+                                <v-list-item-content class="iconTitle">
                                     <v-list-item-title >{{item.text}}</v-list-item-title>
                                 </v-list-item-content>
+
                             </v-list-item>
                         </div>                       
                         <div  class="settings">
-                            <span class="list">SETTINGS</span>
+                            <span class="list mb-2">SETTINGS</span>
                             <v-list-item
                             class="list-items mt-2"
                             v-for="(item, i) in menuSettings"
-                            :style="{background: $vuetify.theme.themes[theme].menu}"
                             :key="'b'+ i">
-                                <v-list-item-icon>
+                                <v-list-item-icon class="iconTitle">
                                      <i class="material-icons-round">{{item.icon}}</i>      
                                 </v-list-item-icon> 
-                                <v-list-item-content>
+                                <v-list-item-content class="iconTitle">
                                     <v-list-item-title >{{item.text}}</v-list-item-title>
                                 </v-list-item-content>
+
                             </v-list-item>
                         </div>
                     </v-list-item-group>
@@ -67,24 +65,22 @@
 <script>
 import Content from './Content.vue';
 import { EventBus } from '@/event-bus';
-import global from '../mixins/global.js';
 
 export default {
     name: "Menu",
-    mixins:[global],
     components: { Content },
     data() {
         return {        
             stateless: true,
             drawer: false,
-            selectedItem: 1,
+            selectedItem: 0,
             menuInit: [
                 { text: "Dashboard", icon: "home"},
                 { text: "Calendar", icon: "calendar_today"},
             ],
             menuReport: [
                 { text: "Machina Hi", icon: "add_box"},
-                { text: "Heads Up", icon: "mdi-arrow-right-bold-circle", mdiIcon: true},
+                { text: "Heads Up", icon: "outbound", sharp: true},
                 { text: "Stay Around", icon: "sync"},
                 { text: "Analytics", icon: "insert_chart"},
                 { text: "My Reports", icon: "equalizer"}
@@ -106,47 +102,36 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style  lang="scss">
 
 .list-all{
-        height:94%;
+        height:91%;
 }
 
-.navigation{
-    margin-top:40px; 
+.navigation-draw{
+    padding: 0px 15px;
+    margin-top:3.9rem; 
     .list{
-        width:90%;
         opacity: .3;
-        color: grey;
-        font-size:0.8rem;
-        .v-icon{
-            font-size:0.8rem !important;
+        color: #BABFC7;
+        font-size:12px;
+        i{
+            display:flex;
+            justify-content:end;
+            font-size:14px;
         }
     }
 
     .list-items{
         min-height:auto !important;
-        height:1.8rem;
-        margin: 0 0.5rem;
-        width:90%;
-        border-radius:0.25rem;
-        background-color: #fff;
-        box-shadow: 0 3px 1px -2px rgba(0 ,0 ,0 , 0), 0 2px 2px 0 rgba(0 ,0 ,0 , 0), 0 1px 5px 0 rgba(0, 0 ,0,  0.08);
+        height:2.3rem;
+        padding:1.1rem 0.8rem ;
+        border-radius:5px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.05);
         .v-list-item__icon{
             margin: 0;
             align-self: normal;
         }
-        .v-list-item__title{
-            font-size:0.8rem;
-        }
-        .theme--light.v-icon{
-            color:black;
-        }
-    }
-
-    .v-list-item-group .v-list-item--active{
-        color:#fff !important; 
-        background-color:#4434fc !important;
     }
 
     .settings{
@@ -154,12 +139,21 @@ export default {
         bottom:0;
         width:100%;
     }
-}
+
+    .v-list-item-group .v-list-item--active{
+        background-color:var(--btnActive);
+        .iconTitle{
+            color: var(--btnActive-color) !important;
+        }
+    } 
+} 
+
 
 @media(max-height:967px){
    .list-all{
-    height:90%;
+    height:88%;
    }
+
 }
 
 </style>

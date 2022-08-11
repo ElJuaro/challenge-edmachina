@@ -19,7 +19,8 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel:"stylesheet", href:"https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"}
+      { rel:"stylesheet", href:"https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"},
+      { rel:'stylesheet', type:'text/css',href:'https://fonts.googleapis.com/css?family=Montserrat:thin,extra-light,light,100,200,300,400,500,600,700,800'}
     ]
   },
 
@@ -38,6 +39,8 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    '@nuxtjs/color-mode'
+    
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -47,29 +50,13 @@ export default {
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
+    customVariables: ['~/assets/main.scss'],
     theme: {
       dark: false,
       themes: {
         light: {
-          body: '#f4f4f4',
-          header: '#4434fc',
-          grid: '#fff',
-          footer: '#8b83fc',
-          navigation: '#fff',
-          titleGrid: '#4434fc',
-          menu: '#fff',
-          iconsActions: '#b04afc',
         },
         dark: {
-          body:'#141c34 ',
-          header: '#040404',
-          grid: '#2b3344',
-          footer: '#040404',
-          navigation: '#2b3344',
-          titleGrid: '#fff',
-          menu:'#323b4f',
-          iconsActions : '#e0b007',
         }
       },
     }

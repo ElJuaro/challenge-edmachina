@@ -2,63 +2,77 @@
 <v-row no-gutters class="content-grid">
     <v-col
     cols="12" 
-    class="d-flex">
+    class="d-flex" style="gap:1.25rem">
         <v-col  
-        cols="3" 
-        style="height:9rem;" 
         v-for="(item, i) in [0,1,2,3]" 
-        :key="i">
-        <div class="divs" :style="{background: $vuetify.theme.themes[theme].grid}"></div>
+        :key="i"
+        class="first-row_column">
         </v-col>
     </v-col>
     <v-col 
     cols="12" 
-    class="d-flex" >
-        <v-col  
-        cols="4" 
-        style="height:18rem;" 
+    class="d-flex mt-5" style="gap:1rem">
+        <v-col   
         v-for="(item,i) in [0,1,2]"
-        :key="'A' + i">
-            <div class="divs" :style="{background: $vuetify.theme.themes[theme].grid}"></div>
+        :key="'A' + i"
+        class="second-row_column" >
         </v-col>
     </v-col>
-    <span class="title-grids" :style="{color: $vuetify.theme.themes[theme].titleGrid}">New Group</span>
+    <span class="title-grids my-5" >New Group</span>
     <v-col 
     cols="12" 
-    class="d-flex">
-        <v-col  
-        cols="4" 
-        style="height:15rem" >
-            <div class="divs" :style="{background: $vuetify.theme.themes[theme].grid}"></div>
-        </v-col>
+    class="d-flex" style="gap:0.9rem">
+        <div 
+        class="three-row_column_1">
+        </div>
         <v-col 
-        cols="8"  
-        style="height:15rem">
-            <div class="divs" color="grid" :style="{background: $vuetify.theme.themes[theme].grid}"></div>
+        class="three-row_column_2">
         </v-col>
     </v-col>
 </v-row>
 </template>
 
 <script>
-import global from '../mixins/global.js';
 export default{
     name: "ContentGrid",
-    mixins:[global]
 }
 </script>
 
 <style lang="scss">
-    .col .col-3, .col .col-4, .col .col-8, span{
+    .content-grid{
+        .title-grids{
+            width:8.65rem;
+        }
+    }
+    .span{
         padding: .3rem .3rem;
     }
-    .divs{
-        
-        border-radius:4px;
-        height:100%; 
-        width:100%;
+
+    .first-row_column{
+        height:10.2rem;
+        width:16.7rem;
+        border-radius:6px;
+        gap:1.25rem;
     }
-    .title-grids{
-        font-size: 1.4rem;
+
+    .second-row_column{
+        width:22.8rem;
+        height: 22.3rem;
+        border-radius: 6px;
     }
+
+    .three-row_column{
+        &_1{
+            width:22.8rem;
+            height:22.3rem;
+            border-radius:6px;
+        }
+        &_2{
+            height:22.3rem;
+            width:46.7rem;
+            border-radius:6px;
+        }
+    }
+
+
 </style>
