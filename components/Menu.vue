@@ -14,13 +14,19 @@
                         <v-list-item
                         class="list-items mt-2"
                         v-for="(item, i) in menuInit"
-                        :key="i">
+                        :key="i"
+                        @click="itemSelect(item.id)">
                             <v-list-item-icon class="iconTitle">
                                <i class="material-icons-round">{{item.icon}}</i>
                             </v-list-item-icon> 
                             <v-list-item-content class="iconTitle">
                                <v-list-item-title >{{item.text}}</v-list-item-title>
                             </v-list-item-content>
+                            <v-list-item-action v-if="selectedItem == item.id">
+                                    <span class="material-icons-round iconTitle">
+                                        chevron_right
+                                    </span>
+                                </v-list-item-action>
                         </v-list-item>
 
                         <div class="reports">
@@ -31,7 +37,8 @@
                             <v-list-item
                             class="list-items mt-2"
                             v-for="(item, i) in menuReport"
-                            :key="'A' + i">
+                            :key="'A' + i"
+                            @click="itemSelect(item.id)">
                                 <v-list-item-icon class="iconTitle">
                                      <i class="material-icons" v-if="!item.sharp">{{item.icon}} </i>
                                      <i class="material-icons-sharp" v-if="item.sharp">{{item.icon}}</i>
@@ -39,7 +46,11 @@
                                 <v-list-item-content class="iconTitle">
                                     <v-list-item-title >{{item.text}}</v-list-item-title>
                                 </v-list-item-content>
-
+                                <v-list-item-action v-if="selectedItem == item.id">
+                                    <span class="material-icons-round iconTitle">
+                                        chevron_right
+                                    </span>
+                                </v-list-item-action>
                             </v-list-item>
                         </div>                       
                         <div  class="settings">
@@ -47,14 +58,19 @@
                             <v-list-item
                             class="list-items mt-2"
                             v-for="(item, i) in menuSettings"
-                            :key="'b'+ i">
+                            :key="'b'+ i"
+                            @click="itemSelect(item.id)">
                                 <v-list-item-icon class="iconTitle">
                                      <i class="material-icons-round">{{item.icon}}</i>      
                                 </v-list-item-icon> 
                                 <v-list-item-content class="iconTitle">
                                     <v-list-item-title >{{item.text}}</v-list-item-title>
                                 </v-list-item-content>
-
+                                <v-list-item-action v-if="selectedItem == item.id">
+                                    <span class="material-icons-round iconTitle">
+                                        chevron_right
+                                    </span>
+                                </v-list-item-action>
                             </v-list-item>
                         </div>
                     </v-list-item-group>
@@ -75,21 +91,21 @@ export default {
             drawer: false,
             selectedItem: 0,
             menuInit: [
-                { text: "Dashboard", icon: "home"},
-                { text: "Calendar", icon: "calendar_today"},
+                { id: 0 , text: "Dashboard", icon: "home"},
+                { id: 1 , text: "Calendar", icon: "calendar_today"},
             ],
             menuReport: [
-                { text: "Machina Hi", icon: "add_box"},
-                { text: "Heads Up", icon: "outbound", sharp: true},
-                { text: "Stay Around", icon: "sync"},
-                { text: "Analytics", icon: "insert_chart"},
-                { text: "My Reports", icon: "equalizer"}
+                { id: 2 ,text: "Machina Hi", icon: "add_box"},
+                { id: 3 ,text: "Heads Up", icon: "outbound", sharp: true},
+                { id: 4 ,text: "Stay Around", icon: "sync"},
+                { id: 5 ,text: "Analytics", icon: "insert_chart"},
+                { id: 6 ,text: "My Reports", icon: "equalizer"}
             ],
             menuSettings: [
-                { text: "Manage Users", icon: "person"},
-                { text: "Cloud Connect", icon: "cloud_download"},
-                { text: "Api Manager", icon: "api"},
-                { text: "Help/Support", icon: "help"},
+                { id:7 ,text: "Manage Users", icon: "person"},
+                { id:8 ,text: "Cloud Connect", icon: "cloud_download"},
+                { id:9 ,text: "Api Manager", icon: "api"},
+                { id:10 ,text: "Help/Support", icon: "help"},
             ]
         };
     },
@@ -98,6 +114,12 @@ export default {
             this.drawer = data;
         })
     }, 
+
+    methods: {
+        itemSelect(value){
+            value = this.selectedItem;
+        }
+    }
     
 }
 </script>
@@ -112,8 +134,7 @@ export default {
     padding: 0px 15px;
     margin-top:3.9rem; 
     .list{
-        opacity: .3;
-        color: #BABFC7;
+        color: var(--menu-header);
         font-size:12px;
         i{
             display:flex;
@@ -149,11 +170,16 @@ export default {
 } 
 
 
-@media(max-height:967px){
+@media(max-height:676px){
    .list-all{
-    height:88%;
+    height:87%;
    }
-
+   .navigation-draw{
+       .list-items{
+        height:2rem !important;
+        padding: 1.05rem 0.8rem !important;
+       } 
+   }
 }
 
 </style>

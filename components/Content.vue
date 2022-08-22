@@ -2,14 +2,14 @@
 <v-container 
     fluid 
     class="container" >
-    <div v-bind:class="{containbody : drawerIsOpen}">
+    <div :class="{containbody : drawerIsOpen}">
         <v-row no-gutters style="margin:1.7rem 0px;">
             <v-col
             cols="12"
             class="d-flex justify-space-between" style="height:1.3rem;">
                 <div class="first-header_div  d-flex align-center justify-space-between">
                     <div class="title-grids">My Report</div>
-                    <div class="first_header_div_icons">
+                    <div class="first_header_div_icons">                       
                         <v-btn icon class="iconsContent">
                             <i class="material-icons-outlined">
                                 content_copy
@@ -24,43 +24,45 @@
                 </div>
                 <div class="col-9  second-header_div d-flex align-center justify-end" >
                     <div class="second-header_div__actions">
-                        <v-btn tile  text="true" class="btns-filter" v-for = "(btn, i) in groupBtns" :key="i">
+                        <v-btn tile  text class="btns-filter" v-for = "(btn, i) in groupBtns" :key="i">
                             <i class="material-icons" left>{{btn.icon}}</i>                          
                             {{btn.title}}
                         </v-btn>
                     </div>
                     <div class="second-header_div__filters ">
-                         <v-btn icon class="iconsContent">
-                            <i class="material-icons-round">filter_alt</i>
-                        </v-btn>
-                        <v-btn icon class="iconsContent">
-                            <i class="material-icons">dashboard</i>                         
-                        </v-btn>
+                        <v-btn-toggle group>           
+                            <v-btn icon  class="iconsContent">
+                                <i style="margin-left: -2px;" class="material-icons-round">filter_alt</i>
+                            </v-btn>
+                           <v-btn icon class="iconsContent">
+                               <i class="material-icons">dashboard</i>
+                           </v-btn>
+                        </v-btn-toggle>
                         <v-menu
                         left
-                        nudge-bottom="34"    
-                        min-width="210px"
-                        rounded="8px"        
+                        nudge-bottom="34"   
+                        min-width="208px"                          
                         >
                             <template v-slot:activator="{on , attrs}">
                                 <v-btn 
                                 icon
                                 v-bind="attrs"
                                 v-on="on"
-                                class="iconsContent">
+                                class="iconsContent"
+                                style="width:42px;height:42px">
                                     <i class="material-icons-outlined">
                                         app_registration
                                      </i>              
                                 </v-btn>
                             </template>
-                             <v-list height="338" width="208">
+                             <v-list height="338.27" width="210">
                                 <v-list-item-group 
                                     v-model="selectedItem">
                                     <v-list-item
                                         class="list-items"
                                         v-for="(item, i) in dropdownConfig"
                                         :key="i"
-                                        :style="[i == 6 ? {borderTop : '1px solid #80808061'} : {border : 'none'}]">
+                                        :style="[setStyleBorder(i)]">
                                         <v-list-item-icon class="iconTitle">
                                             <i class="material-icons" v-if="!item.sharp">{{item.icon}}</i>
                                             <i class="material-icons-sharp" v-if="item.sharp">{{item.icon}}</i>
@@ -116,6 +118,19 @@ export default {
             this.drawerIsOpen = data;
         })
     }, 
+    methods:{
+        setStyleBorder(key){
+            if(key == 0){
+                return { borderTopLeftRadius: '6px'}
+            }
+            if(key == 6){
+                return { borderTop: '1px solid #80808061' };
+            }
+            if(key == 7){
+                 return { borderBottomLeftRadius: '6px', borderBottomRightRadius:'6px' };
+            }
+        }
+    },
 }
 </script>
 
@@ -167,9 +182,8 @@ export default {
         }
     }
     &__filters{
-        display:flex; 
-        gap:12px
-        
+        align-items:center;
+        display:flex;        
     }
     .v-btn:not(.v-btn--round).v-size--default{
         height:1.25rem;

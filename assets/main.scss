@@ -6,29 +6,43 @@
     --body: #f4f4f4;
     --header:#4436FD;
     --menu: #fff;
+    --menu-header: #BABFC7; 
     --icons: #6E6B7B;
     --btnActive: #4436FD;
     --btnActive-color: #fff;
     --title-grid:#4436FD;
     --btnActions:  #AA3EFF;
     --grid: #fff;
-    --footer: #8b83fc;
+    --footer: #8C80F9;
     --menu-profile-content: #4436FD;
+    --menu-accounts: #fff;
+    --menu-accounts-item : #4436FD;
+    --menu-accounts-item-allAcounts: #EBE9F1;
+    --btn-toggle-active:#fff;
+    --btn-toggle-active-background: #4436FD;
+    --menu-content-back:#fff;
 }
 
 .dark-mode{
     --body: #141c34;
     --header: #040404;
     --menu : #283046;
+    --menu-header: #C4C4C4; 
     --icons: #C4C4C4;
     --btnActive: #F1BC01; 
-    --btnActive-color:#black;
+    --btnActive-color:#283046;
     --title-grid: #fff;
     --btnActions: #F1BC01;
     --grid :#283046;
     --footer:  #040404;
     --menu-profile-content: #F1BC01;
     --menu-items: #2F3850;
+    --menu-accounts: #EBE9F1;
+    --menu-accounts-item : #fff;
+    --menu-accounts-item-allAcounts: #2C354D;
+    --btn-toggle-active:#F1BC01;
+    --btn-toggle-active-background:transparent;
+    --menu-content-back:#2F3850;
 }
 
 #app{
@@ -59,7 +73,13 @@
 
 .iconsContent{
     color:var(--icons) !important;
-    border-radius:0;
+    border-radius:5px !important;
+}
+
+.v-btn-toggle > .v-btn.v-btn--active {
+    color: var(--btn-toggle-active) !important;
+    background-color: var(--btn-toggle-active-background) !important; 
+    
 }
 
 .btns-filter{
@@ -75,9 +95,6 @@
     background: var(--footer) !important;
 }
 
-
-
-
 .material-icons, .material-icons-outlined, .material-icons-round{
     font-size:1.5rem;
     height:1.3rem;
@@ -91,11 +108,25 @@
     width:7.9rem;   
 }
 
-
 .first-row_column , .second-row_column , .three-row_column_1 , .three-row_column_2 {
     background: var(--grid) !important;
 }
 
 .v-list-item{
     min-height:1px;
+}
+
+.v-btn-toggle .v-btn.v-btn.v-size--default {
+    min-width:0;
+} 
+
+.v-btn-toggle:not(.v-btn-toggle--dense) .v-btn.v-btn.v-size--default {
+    height: 42px;
+    width:42px;
+}
+
+.theme--light.v-sheet {
+    background-color:none ;
+    background: var(--menu-content-back);
+    border-radius:6px;
 }

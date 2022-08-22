@@ -33,10 +33,6 @@
         </div>
       </v-btn>
     </div>
-    <v-menu
-      left
-      nudge-bottom="40">
-        <template v-slot:activator="{on , attrs}">
         <div class="perfil">
           <div class="perfil-data">
             <span>Jane Doe</span>
@@ -44,37 +40,65 @@
           </div>
           <div 
             class="perfil-img"
-            v-bind="attrs"                               
-            v-on="on">
+            @click="openMenu()">
             <div class="status">
                 <div class="status_value"></div>
             </div>
             <img src="../assets/img/imagePerfil.png"/>
           </div>
         </div>
-         </template>
-          <v-list width="208">
-            <v-list-item-group 
-              v-model="selectedItem">
-               <v-list-item
-                  class="list-items"
-                  v-for="(item, i) in menuProfile"                
-                  :key="i"
-                  :style="[setStyleBorder(i)]" >
-                    <v-list-item-icon v-if="item.icon" class="iconTitle">
-                      <i class="material-icons">{{item.icon}}</i>
-                    </v-list-item-icon> 
-                    <v-list-item-content  class="iconTitle">
-                      <v-list-item-title :style="[item.title == 'Teclab' ? {fontWeight:'bold'}: null]">{{item.title}}</v-list-item-title>
-                      <v-list-item-subtitle v-if="item.subTitle" class="iconTitle">{{item.subTitle}}</v-list-item-subtitle>
-                    </v-list-item-content >
-                    <v-list-item-action v-if="item.options" class="iconTitle">
-                      <i class="material-icons" small>chevron_right</i>
-                    </v-list-item-action>
-                </v-list-item>
+      <v-card
+      max-width="300"
+      class="menu-profile"
+      :style="[drawerPerfil ? {display : 'inline'} : {display : 'none'}]"
+      >
+          <v-list width="210">
+            <v-list-item-group>              
+              <v-menu                
+                v-for="(item, i) in menuProfile"                
+                :key="i"
+                nudge-left="230"
+                >                     
+                  <template v-slot:activator="{ on}">                             
+                    <v-list-item 
+                    v-on="on" 
+                    class="list-items"
+                    @click="openMenu(i)"
+                    :style="[setStyleBorder(i)]"
+                    >
+                      <v-list-item-icon v-if="item.icon" class="iconTitle">
+                        <i class="material-icons">{{item.icon}}</i>
+                      </v-list-item-icon>              
+                      <v-list-item-content  class="iconTitle">
+                        <v-list-item-title :style="[item.title == 'Teclab' ? {fontWeight:'bold'}: null]">{{item.title}}</v-list-item-title>
+                        <v-list-item-subtitle v-if="item.subTitle" class="iconTitle">{{item.subTitle}}</v-list-item-subtitle>
+                      </v-list-item-content>
+                      <v-list-item-action v-if="item.options" class="iconTitle">
+                        <i class="material-icons" small>chevron_right</i>
+                      </v-list-item-action>
+                    </v-list-item>
+                  </template>                   
+                  <v-card v-if="item.options" style="border-radius:6px;">
+                    <div  class="square"></div> 
+                      <v-list>
+                        <v-list-item 
+                        class="menu-accounts"
+                        v-for="(options, e) in item.options" 
+                        @click="openMenu()"
+                        :key="e"
+                        :class="{menuProfilAccounts : options.allAccounts}">
+                      <v-list-item-content>
+                         <v-list-item-title ><strong>{{options.allAccounts}}</strong></v-list-item-title>
+                         <v-list-item-subtitle v-if="options.subTitle" class="iconTitle"><strong>{{options.title}}</strong>: {{options.subTitle}}</v-list-item-subtitle>
+                      </v-list-item-content>
+                      </v-list-item>
+                    </v-list>
+                </v-card>                
+               </v-menu>            
             </v-list-item-group>
           </v-list>
-    </v-menu>
+        </v-card>
+   <!--  </v-menu> -->
   </v-app-bar>
    <MenuVue />
 </div>
@@ -89,15 +113,16 @@
     data() {
       return {
         drawer:false, 
+        drawerPerfil: false,
         selectedItem: 1,
         statusProfile: {status:'Active'},
         menuProfile : [
           {title:'Profile', icon:'person'},
           {title:'Teclab', subTitle:'1221719211',
            options : [
-            {title:'All Accounts'},
-            {title:'Teclab:12829347'},
-            {title:'IPP:12829333'}
+            {allAccounts:'All Accounts'},
+            {title:'Teclab', subTitle:'12829347'},
+            {title:'IPP', subTitle:'12829333'}
           ]},
           {title:'Inbox', icon:'mail'},
           {title:'Notifications', icon:'notifications'},
@@ -128,22 +153,33 @@
       },
 
       setStyleBorder(key){
-        if(key == 1){
-          let styleA = {
-            borderBottom : '1px solid #80808061',
-            borderTop: '1px solid #80808061'
-          }
-          return styleA;
-        };
-        if(key == 4){
-          let styleB = {
-            borderBottom: '1px solid #80808061'
-          }
-        return  styleB
+        if(key == 0){
+          return { borderTopLeftRadius: '6px', borderTopRightRadius:'6px'}
         }
-       
-      }
-    },
+        if(key == 1){
+          return { borderBottom : '1px solid #80808061', borderTop: '1px solid #80808061' };
+        }
+        if(key == 4){
+        return  { borderBottom: '1px solid #80808061' };
+        } 
+        if(key == 6){
+          return { borderBottomLeftRadius: '6px', borderBottomRightRadius:'6px' };
+        }
+      },
+      
+
+      openMenu(value){
+        if(value){
+          if(value != 1){
+           this.drawerPerfil = false;
+          }else{
+            this.drawerPerfil = true;
+          }
+        }else{
+          this.drawerPerfil = !this.drawerPerfil;
+        }
+      },
+  }
 }
 </script>
 <style lang="scss">
@@ -154,6 +190,22 @@
 header{
   left:0px !important;
   right:0px !important; 
+  
+}
+
+ .menu-accounts{
+  padding:0 11px !important;
+}
+
+.square{
+    height: 30px;
+    width: 30px;
+    top: 6%;
+    left:90%;
+    border-radius:3px;
+    transform: rotate(45deg);
+    position: absolute;
+    background:var(--menu-accounts-item-allAcounts);
 }
 
 .btns{
@@ -166,7 +218,7 @@ header{
     width:1.9rem!important;
   }
   &-notification{
-    background-color: red;
+    background-color: #EA5455;
     height:1.1rem;
     width:auto;
     aspect-ratio:1/1;
@@ -174,6 +226,39 @@ header{
     margin-bottom: 1.2rem;
     margin-right: -.9rem;
   }
+}
+
+ .v-menu__content{
+  width:210px !important;
+  contain:none;
+  box-shadow:0px 0px 4px -2px rgb(0 0 0 / 75%) !important;
+  border-radius:6px !important;
+  overflow: visible;
+}
+
+.v-card > *:first-child:not(.v-btn):not(.v-chip):not(.v-avatar){
+  border-radius:3px;
+}
+
+.v-sheet .v-list{
+  background:var(--menu) !important;
+}
+
+
+.menu-profile{
+position:absolute; 
+top:90%; 
+right:1%; 
+border-radius:6px !important;
+}  
+
+.menuProfilAccounts{
+  border-bottom: 1px solid var(--menu-accounts);
+  color:var(--menu-accounts-item) !important;
+  pointer-events:none;
+  background:var(--menu-accounts-item-allAcounts);
+  border-top-left-radius:6px; 
+  border-top-right-radius:6px;
 }
 
 .perfil{
@@ -190,6 +275,7 @@ header{
 
   &-img{
     height:2.4rem;
+    cursor:pointer;
     img{
       padding:3px;
       height:100%;
@@ -220,26 +306,22 @@ header{
     width: 11px;
     height: 11px;
     border-radius: 100px;
-    right: 1.5%;
-    top: 65%;
+    right: 1.2%;
+    top: 60%;
     &_value{
       position: absolute;
-    background-color: #28C76F;
-    width: 7px;
-    height: 7px;
-    border-radius: 6.25rem;
-    right: 1.3px;
-    top: 23%;
+      background-color: #28C76F;
+      width: 7px;
+      height: 7px;
+      border-radius: 6.25rem;
+      right: 2px;
+      top: 23%;
     }
 }
 
-@media(min-height:678px){
+@media(max-height:676px){
   .status{
-    right: 1%;
-    top:60%;
-    &_value{
-      right:1.5px;
-    }
+    right:1.4%;
   }
 }
 

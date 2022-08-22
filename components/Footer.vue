@@ -1,5 +1,5 @@
 <template>
-<div class="container-footer">
+<div class="container-footer" :class="{marginMenu : drawerIsOpen}">
     <v-footer
     :padless="false"
     height="40"
@@ -9,9 +9,10 @@
         tile
         width="100%"
         height="100%"
-        class="color-footer text-center d-flex align-center">
+        class="color-footer d-flex align-center">
         <v-card-text
-        class="white--text"
+        class=" ml-5 white--text"
+        style="fontSize:14px;"
         height="100%">
             COPYRIGHT @ 2022 <strong>EdMachina</strong>
         </v-card-text>
@@ -21,8 +22,20 @@
 </template>
 
 <script>
+import { EventBus } from '@/event-bus';
 export default {
     name: "Footer",
+    data () {
+        return {
+            drawerIsOpen : false,
+        }
+    },
+
+    created(){
+        EventBus.$on('changeIt', (data) => {
+            this.drawerIsOpen = data;
+        })
+    }, 
 };
 
 </script>
@@ -39,5 +52,9 @@ export default {
     margin-top:10.6rem;
     width:100%;
     bottom:0;
+}
+
+.marginMenu{
+    margin-left:16.2rem;
 }
 </style>
